@@ -1,1 +1,7 @@
+<h2> Edit your link here </h2>
 
+<%= form_tag "/links/#{@link.id}", method: 'put' do %>
+    Url: <%= text_field_tag :url, @link.url %>
+    Title: <%= text_field_tag :title, @link.title %>
+    <%= submit_tag 'Update Link' %>
+<% end %>

@@ -20,7 +20,7 @@ RSpec.describe "can edit links" do
     click_on "Update Link"
 
 
-    expect(page).to have_content("Texas Longhorns")
-    expect(page).to have_content("https://orangebloods.com")
+    expect(page).to have_content("College Royalty")
+    expect(page).to have_content("https://bluebloods.com")
   end
 end

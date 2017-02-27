@@ -13,7 +13,15 @@ class LinksController < ApplicationController
   end
 
   def update
-
+    link = Link.find(params[:id].to_i)
+    if link.update(link_params)
+      flash[:success] = "Updated Link Successfully!"
+      redirect_to root_path
+    else
+      error = link.errors.messages.first[1][0]
+      flash[:error] = possible_errors[error]
+      redirect_to root_path
+    end
   end
 
   def create
