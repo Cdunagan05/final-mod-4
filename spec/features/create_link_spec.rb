@@ -11,6 +11,5 @@ RSpec.describe "can create links", :js => :true do
       expect(page).to have_text("Turing")
       expect(page).to have_text("http://turing.io")
     end
-
   end
 end
