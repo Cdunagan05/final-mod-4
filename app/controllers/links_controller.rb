@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     else
       error = link.errors.messages.first[1][0]
       flash[:error] = possible_errors[error]
-      redirect_to root_path
+      redirect_to edit_link_path(link)
     end
   end
 

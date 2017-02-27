@@ -1,4 +1,5 @@
 <h2> Edit your link here </h2>
+<%= flash[:error] %>
 
 <%= form_tag "/links/#{@link.id}", method: 'put' do %>
     Url: <%= text_field_tag :url, @link.url %>
