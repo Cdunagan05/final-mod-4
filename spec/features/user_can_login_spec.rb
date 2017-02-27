@@ -31,6 +31,6 @@ RSpec.describe "user can login" do
 
     click_on "Logout"
 
-    expect(current_path).to eq(login_path)
+    expect(current_path).to eq(root_path)
   end
 end

@@ -7,6 +7,16 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
+def stub_logged_in_user
+  user = User.create(email: 'cd@utexas.edu', password_digest: 'texas')
+  visit '/'
+  click_on 'Login'
+  fill_in "email", :with => "cd@utexas.edu"
+  fill_in "password", :with => "texas"
+  click_on "Submit"
+  user.reload
+end
+
 Capybara.javascript_driver = :poltergeist
 
 
