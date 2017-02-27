@@ -32,8 +32,7 @@ RSpec.describe "user can sign up" do
   end
 
   scenario "User cannot sign up if email is taken" do
-    User.create(email: "cdun@gmail.com")
-
+    user = User.create(email: "cdun@gmail.com", password_digest: 'boom')
 
     visit "/"
     click_on "Sign-up"
