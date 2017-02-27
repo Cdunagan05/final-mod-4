@@ -4,14 +4,16 @@ RSpec.describe "can create links", :js => :true do
   scenario "Create a new link" do
     stub_logged_in_user
 
-    fill_in "Title:", :with => "Turing"
-    fill_in "URL:", :with => "http://turing.io"
-    click_on "Add Link"
+    fill_in "url", with: 'https://orangebloods.com'
+    fill_in "title", with: "Texas Longhorns"
+    click_on "Submit Link"
 
-    within('#links-list') do
-      expect(page).to have_text("Turing")
-      expect(page).to have_text("http://turing.io")
-    end
+    expect(current_path).to eq(root_path)
+    expect(User.first.links.count).to eq(1)
+
+
+    expect(page).to have_content("Texas Longhorns")
+    expect(page).to have_content("https://orangebloods.com")
   end
 
   scenario "Cannot create link with invalid URL" do
@@ -19,11 +21,11 @@ RSpec.describe "can create links", :js => :true do
 
     expect(User.first.links.count).to eq(0)
 
-    fill_in "Title:", :with => "Turing"
-    fill_in "URL:", :with => "ht.turing.io"
-    click_on "Add Link"
+    fill_in "url", with: 'orangebloods.com'
+    fill_in "title", with: "Texas Longhorns"
+    click_on "Submit Link"
 
-    expect(page).to have_content("Please enter a valid URL")
     expect(User.first.links.count).to eq(0)
+    expect(page).to have_content("You entered an invalid URL, please try again")
   end
 end

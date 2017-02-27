@@ -1,18 +1,26 @@
 <%= flash[:success] %>
 <% if current_user %>
 <%= link_to "Logout", logout_path, method: :delete %><br><br>
-Welcome: <%= current_user.email %>
-  <form id="new-link">
-    <label>URL:
-      <input id="link-url">
-    </label>
-    <label>Title:
-      <input id="link-title">
-    </label>
-    <input type="submit" value="Add Link">
-  </form>
+Welcome: <%= current_user.email %><br>
+<%= flash[:notice] %>
+<%= form_tag "/links" do %>
+  Link URL: <%= text_field_tag :url %>
+  Link Title: <%= text_field_tag :title %>
+  <%= submit_tag "Submit Link" %>
+<% end %>
 
-  <div id="links-list"></div>
+  <h3> Here is a list of my links </h3>
+    <% @links.map do |link| %>
+      Link Title is <%= link.title %>
+      <div class="link" data-link-id="<%= link.id %>" data-link-title="<%= link.url %>"><%= link.url%>
+      <p class="read-status">Read Status: <%= link.read%></p><br>
+         <% if !link.read %>
+           <%= link_to "Mark as read", api_v1_link_path(link), class: "mark-as-read" %>
+         <% end %><br>
+         <%= link_to "Edit Link", edit_link_path(link.id) %><br>
+         ------------------------
+      </div><br>
+    <% end %>
 
   <h2>Hot Reads!</h2>
   <ol id="hot-reads">
