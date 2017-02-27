@@ -8,6 +8,14 @@ class LinksController < ApplicationController
     end
   end
 
+  def edit
+    @link = Link.find(params[:id])
+  end
+
+  def update
+
+  end
+
   def create
     @link = current_user.links.create(link_params)
     if @link.save
