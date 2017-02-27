@@ -1,5 +1,6 @@
 <%= flash[:success] %>
 <% if current_user %>
+<%= link_to "Logout", logout_path, method: :delete %><br><br>
 Welcome: <%= current_user.email %>
   <form id="new-link">
     <label>URL:
