@@ -28,6 +28,6 @@ RSpec.describe "user can sign up" do
     click_on "Submit"
 
     expect(current_path).to eq(signup_path)
-    expect(page).to have_content("Your passwords do not match")
+    expect(page).to have_content("Your passwords do not match!")
   end
 end
