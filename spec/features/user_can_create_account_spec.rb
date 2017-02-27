@@ -30,4 +30,22 @@ RSpec.describe "user can sign up" do
     expect(current_path).to eq(signup_path)
     expect(page).to have_content("Your passwords do not match!")
   end
+
+  scenario "User cannot sign up if email is taken" do
+    User.create(email: "cdun@gmail.com")
+
+
+    visit "/"
+    click_on "Sign-up"
+
+    expect(current_path).to eq(signup_path)
+
+    fill_in "user_email", :with => "cdun@gmail.com"
+    fill_in "user_password", :with => "texas"
+    fill_in "user_password_confirmation", :with => "texas"
+    click_on "Submit"
+
+    expect(current_path).to eq(signup_path)
+    expect(page).to have_content("Another user already has this email!")
+  end
 end
