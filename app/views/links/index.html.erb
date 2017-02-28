@@ -12,27 +12,23 @@ Welcome: <%= current_user.email %><br>
 <div id="links-list">
   <h3> Here is a list of my links </h3>
     <% @links.map do |link| %>
-      Link Title is <%= link.title %>
-      <div class="link" data-link-id="<%= link.id %>" data-link-title="<%= link.url %>"><%= link.url%>
+    <div class="link" data-link-id="<%= link.id %>" data-link-title="<%= link.url %>"><%= link.url%>
+      <h3> Link Title is: <%= link.title %></h3>
       <p class="read-status">Read Status: <%= link.read%></p><br>
+      <p class="link-buttons">
          <% if !link.read %>
            <button type=button class="mark-read">Mark as read</button>
+         <% else %>
+           <button type=button class="mark-unread">Mark as unread</button>
          <% end %><br>
+      </p>
          <%= link_to "Edit Link", edit_link_path(link.id) %><br>
          ------------------------
       </div><br>
     <% end %>
 </div>
 
-  <h2>Hot Reads!</h2>
-  <ol id="hot-reads">
-  <% @hot_links.each do |read| %>
-    <li class='hot-read'>
-      <a href="<%= read.url %>"><%= read.url %></a>
-    </li>
-  <% end %>
-  </ol>
-  <img src="https://m.popkey.co/4c7272/QL6mJ.gif">
+
 <% else %>
   <%= link_to "Sign-up", signup_path %> or <%= link_to "Login", login_path %>
 <% end %>

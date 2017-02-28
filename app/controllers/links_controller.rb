@@ -1,6 +1,5 @@
 class LinksController < ApplicationController
   def index
-    @hot_links = Link.hot
     if current_user != nil
       @links = current_user.links.all
     else
